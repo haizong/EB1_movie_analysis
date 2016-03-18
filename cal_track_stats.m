@@ -55,13 +55,13 @@ mean_lifetime = mean(life_times); sd_lifetime = std(life_times);
 mean_displacement = mean(dist_sum); sd_displacement = std(dist_sum);
 
 figure(); hold on;
-text (0,0, 'Histogram_all_MTs');
 subplot(2,2,1);
-hist (life_times, 0:2:20);
-set(gca, 'XTick', 0:2:20);
+hist (life_times, 0:2:50);
+set(gca, 'XTick', 0:5:50);
+title (mat_name, 'fontsize', 16, 'Fontname', 'arial');
 xlabel('Lifetime (s)','fontsize', 12, 'Fontname', 'arial');
 ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
-xlim([0,20]);
+xlim([0,50]);
 annotation('textbox',...
     [0.3 0.8 0.1 0.1],...
     'String',{['ave = ' num2str(mean_lifetime)],['std =' num2str(sd_lifetime)]},...
@@ -96,4 +96,6 @@ set(gca, 'XTick', -90:90:90);
 xlabel('EB1 commet angle', 'fontsize', 12, 'Fontname', 'arial');
 ylabel('Number of comets', 'fontsize', 12, 'Fontname', 'arial');
 xlim([-90,90]);
-print_save_figure(gcf, ['Histogram_of_', MT_population], [mat_name, '_processed']);
+print_save_figure(gcf, [mat_name, MT_population],'Processed');
+
+close; 
