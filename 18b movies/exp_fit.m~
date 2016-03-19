@@ -1,0 +1,26 @@
+% Frequency distributiion of Lifetime -> exponential curve fit -> calculate
+% important parameters including K and tau. 
+
+%% Resave data separately as Neg2 and 18B2. 
+
+clc; clear;
+load TracksInfo_plot.mat; 
+
+ 
+% Pool all the lifetimes data together. 
+lifetimes_total = [];
+for i = length(TracksInfo)
+    if
+    lifetimes_total_Neg2 = [lifetimes_total; TracksInfo(i).life_times];
+    lifetimes_total_18B2 = [lifetimes_total; TracksInfo(i).life_times];
+end 
+
+%% Perform frequency distribution of all the life_times data 
+tbl_temp= tabulate(lifetimes_total);
+tbl = tbl_temp(4:2:end, :); 
+clear tbl_temp;
+
+bin = tbl(:,1);
+freq_dist = tbl(:,3); 
+
+[fitresult, gof, Best_fit_value] = createFit(bin, freq_dist)
