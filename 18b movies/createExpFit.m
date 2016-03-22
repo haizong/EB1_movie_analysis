@@ -1,4 +1,4 @@
-function [fitresult, gof, Best_fit_value] = createExpFit(bin, freq_dist)
+function [fitresult, gof] = createExpFit(bin, freq_dist, name)
 %CREATEFIT(BIN,FREQ_DIST)
 %  Create a fit.
 %
@@ -34,14 +34,14 @@ Y0 = coefficients(1);
 K = - coefficients(2);
 Tau = 1/K; 
 
-Best_fit_value.Y0 = Y0; 
-Best_fit_value.K = K; 
-Best_fit_value.Tau = Tau; 
-Best_fit_value.Y0_ci = ci(:,1)'; 
-Best_fit_value.K_ci = - ci(:,2)'; 
-Best_fit_value.Tau_ci = 1./Best_fit_value.K_ci;  
+gof.Y0 = Y0; 
+gof.K = K; 
+gof.Tau = Tau; 
+gof.Y0_ci = ci(:,1)'; 
+gof.K_ci = - ci(:,2)'; 
+gof.Tau_ci = 1./gof.K_ci;  
 
-% Create a figure for the plots.
+%% Create a figure for the plots.
 figure( 'Name', 'One phase decay' );
 
 % Plot fit with data.
@@ -59,7 +59,7 @@ set( t, 'FontSize',12 );
 % Label axes
 xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
 ylabel( 'Frequency Distribution (%)' , 'fontsize', 12, 'Fontname', 'arial' );
-title ('One phase decay fitting', 'fontsize', 14, 'Fontname', 'arial' );
+title (['One phase decay fitting of ', name], 'fontsize', 14, 'Fontname', 'arial' );
 
 % Plot residuals.
 subplot( 2, 1, 2 );
@@ -69,5 +69,9 @@ legend( r, 'One phase decay - residuals', 'Zero Line', 'Location', 'NorthEast' )
 % Label axes
 xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
 ylabel( 'Residuals' );
+
+print_save_figure( gcf, ['Exponential_fit_of_', name], 'curve_fit' ); 
+
+
 
 
