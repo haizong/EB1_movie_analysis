@@ -1,5 +1,5 @@
 % Specify MT population in input. All MTs or MTs inside the box. 
-function [vel_all, vel_means, dist_all, dist_sum, angle_all, angle_flipped, life_times] ...
+function [vel_all, vel_means, dist_all, dist_sum, angle_all, angle_flipped,life_times] ...
     = cal_track_stats(xCrd, yCrd, dt, ratio_dist, MT_population, mat_name)
 
 % save data dimentions
@@ -28,6 +28,7 @@ for i = 1:n_tracks
     temp = dist_all(i, :);
     dist_sum(i) = sum(temp(~isnan(temp)));
     life_times(i) = 2*length(temp(~isnan(temp)));
+    
 end;
 
 angle_all= nan(n_tracks, 1); 
@@ -49,53 +50,56 @@ for i = 1:n_tracks
         end;
     end;
 end;
+vel_means( vel_means==0 ) = nan;
+dist_sum( dist_sum==0 ) = nan;
+life_times( life_times==0 ) = nan;
+mean_vel = nanmean(vel_means); sd_vel = nanstd(vel_means);
+mean_lifetime = nanmean(life_times); sd_lifetime = nanstd(life_times);
+mean_displacement = nanmean(dist_sum); sd_displacement = nanstd(dist_sum);
 
-mean_vel = mean(vel_means); sd_vel = std(vel_means);
-mean_lifetime = mean(life_times); sd_lifetime = std(life_times);
-mean_displacement = mean(dist_sum); sd_displacement = std(dist_sum);
-
-figure(); hold on;
-subplot(2,2,1);
-hist (life_times, 0:2:50);
-set(gca, 'XTick', 0:5:50);
-title (mat_name, 'fontsize', 16, 'Fontname', 'arial');
-xlabel('Lifetime (s)','fontsize', 12, 'Fontname', 'arial');
-ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
-xlim([0,50]);
-annotation('textbox',...
-    [0.3 0.8 0.1 0.1],...
-    'String',{['ave = ' num2str(mean_lifetime)],['std =' num2str(sd_lifetime)]},...
-    'EdgeColor',[1 1 1]);
-
-subplot(2,2,2);
-hist (vel_means, 0:2:30);
-set(gca, 'XTick', 0:5:30);
-xlabel('Velocity ($\mu$m/min)','fontsize', 12, 'interpreter','latex', 'Fontname', 'arial');
-ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
-xlim([0,30]);
-annotation('textbox',...
-    [0.75 0.8 0.1 0.1],...
-    'String',{['ave = ' num2str(mean_vel)],['std =' num2str(sd_vel)]},...
-    'EdgeColor',[1 1 1]);
-
-
-subplot(2,2,3);
-hist (dist_sum, 0:0.5:6);
-set(gca, 'XTick', 0:1:6);
-xlabel('Displacement ($\mu$m)', 'fontsize', 12, 'interpreter','latex','Fontname', 'arial');
-ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
-xlim([0,6]);
-annotation('textbox',...
-    [0.3 0.3 0.1 0.1],...
-    'String',{['ave = ' num2str(mean_displacement)],['std =' num2str(sd_displacement)]},...
-    'EdgeColor',[1 1 1]);
-
-subplot(2,2,4);
-hist (angle_flipped, -90:6:90);
-set(gca, 'XTick', -90:90:90);
-xlabel('EB1 commet angle', 'fontsize', 12, 'Fontname', 'arial');
-ylabel('Number of comets', 'fontsize', 12, 'Fontname', 'arial');
-xlim([-90,90]);
-print_save_figure(gcf, [mat_name, MT_population],'Processed');
+% figure(); hold on;
+% subplot(2,2,1);
+% hist (life_times, 0:2:50);
+% set(gca, 'XTick', 0:5:50);
+% title (mat_name, 'fontsize', 16, 'Fontname', 'arial');
+% xlabel('Lifetime (s)','fontsize', 12, 'Fontname', 'arial');
+% ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
+% xlim([0,50]);
+% annotation('textbox',...
+%     [0.3 0.8 0.1 0.1],...
+%     'String',{['ave = ' num2str(mean_lifetime)],['std =' num2str(sd_lifetime)]},...
+%     'EdgeColor',[1 1 1]);
+% 
+% subplot(2,2,2);
+% hist (vel_means, 0:2:30);
+% set(gca, 'XTick', 0:5:30);
+% xlabel('Velocity ($\mu$m/min)','fontsize', 12, 'interpreter','latex', 'Fontname', 'arial');
+% ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
+% xlim([0,30]);
+% annotation('textbox',...
+%     [0.75 0.8 0.1 0.1],...
+%     'String',{['ave = ' num2str(mean_vel)],['std =' num2str(sd_vel)]},...
+%     'EdgeColor',[1 1 1]);
+% 
+% 
+% subplot(2,2,3);
+% hist (dist_sum, 0:0.5:6);
+% set(gca, 'XTick', 0:1:6);
+% xlabel('Displacement ($\mu$m)', 'fontsize', 12, 'interpreter','latex','Fontname', 'arial');
+% ylabel('Number of EB1 tracks', 'fontsize', 12, 'Fontname', 'arial');
+% xlim([0,6]);
+% annotation('textbox',...
+%     [0.3 0.3 0.1 0.1],...
+%     'String',{['ave = ' num2str(mean_displacement)],['std =' num2str(sd_displacement)]},...
+%     'EdgeColor',[1 1 1]);
+% 
+% % subplot(2,2,4);
+% % hist (angle_flipped, -90:6:90);
+% % set(gca, 'XTick', -90:90:90);
+% % xlabel('EB1 commet angle', 'fontsize', 12, 'Fontname', 'arial');
+% % ylabel('Number of comets', 'fontsize', 12, 'Fontname', 'arial');
+% % xlim([-90,90]);
+% 
+% print_save_figure(gcf, [mat_name, MT_population],'Processed');
 
 close; 

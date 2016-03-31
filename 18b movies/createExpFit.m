@@ -46,15 +46,19 @@ figure( 'Name', 'One phase decay' );
 
 % Plot fit with data.
 subplot( 2, 1, 1 );
-h = bar( xData, yData ); hold on    % Plot histogram
-f = plot( fitresult ); set( f, 'LineWidth', 2 );  % Plot fitcurve
+h = bar( xData, yData );  hold on    % Plot histogram
+f = plot( fitresult ); set( f, 'LineWidth', 2 ); % Plot fitcurve
 l = legend( f, 'Nonlinear regression: One phase decay', 'Location', 'NorthEast');
 set( l, 'FontSize',12 );
 set( gca,'XLim', [2 60], 'XTick', 4:4:60 );
+set( gca,'YLim', [0 60] );
 % Equation: y = a * exp(b*x)
-expfit_str = ['y = ' num2str(Y0) ' * exp(' num2str(-K) '* x)'];
-t = text( 30, 25, expfit_str );
-set( t, 'FontSize',12 );
+expfit_str1 = ['y = ' num2str(Y0) ' * exp(' num2str(-K) '* x)'];
+t1 = text( 30, 25, expfit_str1 );
+set( t1, 'FontSize',12 );
+expfit_str2 = ['Tau = ' num2str(Tau) ];
+t2 = text( 30, 20, expfit_str2 );
+set( t2, 'FontSize',12 );
 
 % Label axes
 xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );

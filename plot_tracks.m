@@ -5,7 +5,7 @@ for i = 1:size(xCrd,1);
     a = xCrd(i, ~isnan(xCrd(i,:)));
     b = yCrd(i, ~isnan(yCrd(i,:)));
     for j = 1:length(a)-1;
-        plot(a([j,j+1]),b([j,j+1]),['-',color],'linewidth',2); 
+        plot( a([j,j+1]),b([j,j+1]),['-',color],'linewidth', 0.5 ); 
     end;
 end;
 set (gca,'Ydir','reverse');

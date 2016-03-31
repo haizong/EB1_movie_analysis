@@ -38,9 +38,10 @@ c = coefficients(3);
 gof.Amplitude = a; 
 gof.Mean = b; 
 gof.SD = sqrt(c^2/2); 
-% Best_fit_value.Amplitude_ci = 
-% Best_fit_value.Mean_ci = 
-% Best_fit_value.SD_ci = 
+
+gof.Amplitude_ci = ci(:,1)';
+gof.Mean_ci = ci(:,2)'; 
+gof.SD_ci = sqrt(ci(:,3)' .^2/2);
 
 %% Plot fit with data.
 figure( 'Name', 'Gaussian Fit' );
@@ -50,10 +51,15 @@ f = plot( fitresult ); set( f, 'LineWidth', 2 );  % Plot fitcurve
 l = legend( 'Velocity vs. binEdges', 'Gaussian Fit', 'Location', 'NorthEast' );
 set( l, 'FontSize',12 );
 set( gca,'XLim', [0 40], 'XTick', 0:5:40 );
+set( gca,'YLim', [0 35] );
 % Equation: f(x) =  a1*exp(-((x-b1)/c1)^2)
-expfit_str = ['y = ' num2str(a, '%.2f') ' * exp(-(x-', num2str(b,'%.2f') '/', num2str(c,'%.2f'),')^2)'];
-t = text( 20, 15, expfit_str );
-set( t, 'FontSize',12 );
+expfit_str1 = ['y = ' num2str(a, '%.2f') ' * exp(-(x-', num2str(b,'%.2f') '/', num2str(c,'%.2f'),')^2)'];
+t1 = text( 20, 15, expfit_str1 );
+set( t1, 'FontSize',12 );
+expfit_str2 = ['Mean of Velocity = ' num2str(b) ];
+t2 = text( 20, 10, expfit_str2 );
+set( t2, 'FontSize',12 );
+xlim( [0, 40] );
 
 % Label axes
 xlabel( 'Velocity (um/min)', 'fontsize', 12, 'Fontname', 'arial' );
