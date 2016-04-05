@@ -15,6 +15,7 @@
 % 4) Exponential fit of pooled lifetimes and F test to compare K
 % 5) Gaussian fit of pooled velocity and F test to compare mean
 
+% HZ 2016-4-2 Bloomington
 %% Pool Neg2 and Kif18b stats.
 clc; clear;
 load RotTracks.mat;
@@ -121,6 +122,7 @@ Neg2_total_sta.lifetime.lt_freq_dist = tbl(:,3);
 [Neg2_total_sta.lifetime.lt_fitresult, Neg2_total_sta.lifetime.lt_gof] = ...
     createExpFit( Neg2_total_sta.lifetime.lt_bin, Neg2_total_sta.lifetime.lt_freq_dist, 'Neg2' );
 
+% For Kif18B
 tbl_temp= tabulate( Kif18B_total_sta.lifetime.lt_total );
 tbl = tbl_temp( 4:2:52, : );
 clear tbl_temp;
@@ -128,8 +130,6 @@ Kif18B_total_sta.lifetime.lt_bin = tbl(:,1);
 Kif18B_total_sta.lifetime.lt_freq_dist = tbl(:,3);
 [Kif18B_total_sta.lifetime.lt_fitresult, Kif18B_total_sta.lifetime.lt_gof] = ...
     createExpFit( Kif18B_total_sta.lifetime.lt_bin, Kif18B_total_sta.lifetime.lt_freq_dist, 'Kif18B' );
-
-% close all;
 
 %% Frequency distribution and Gaussian fit of velocity data
 edges = 0:2:38;
@@ -149,8 +149,6 @@ Kif18B_total_sta.velocity.vl_binValues = binValues';
 [ Kif18B_total_sta.velocity.vl_fitResult, Kif18B_total_sta.velocity.vl_gof ] = ...
     createGaussianFit( Kif18B_total_sta.velocity.vl_binValues, Kif18B_total_sta.velocity.vl_normCounts, 'Kif18B' );
 
-
-
-%% Save data in mat file and csv file
-save ( 'Neg2_EB1_analysis.mat', 'Neg2' );
-save ( 'Kif18B_EB1_analysis.mat', 'Kif18B' );
+%% Save data in mat file
+save ( 'Neg2.mat', 'Neg2' );
+save ( 'Kif18B.mat', 'Kif18B' );

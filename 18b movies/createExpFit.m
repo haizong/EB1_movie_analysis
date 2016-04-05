@@ -59,7 +59,9 @@ set( t1, 'FontSize',12 );
 expfit_str2 = ['Tau = ' num2str(Tau) ];
 t2 = text( 30, 20, expfit_str2 );
 set( t2, 'FontSize',12 );
-
+expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
+t3 = text( 30, 15, expfit_str3 );
+set( t3, 'FontSize',12 );
 % Label axes
 xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
 ylabel( 'Frequency Distribution (%)' , 'fontsize', 12, 'Fontname', 'arial' );

@@ -51,15 +51,19 @@ f = plot( fitresult ); set( f, 'LineWidth', 2 );  % Plot fitcurve
 l = legend( 'Velocity vs. binEdges', 'Gaussian Fit', 'Location', 'NorthEast' );
 set( l, 'FontSize',12 );
 set( gca,'XLim', [0 40], 'XTick', 0:5:40 );
-set( gca,'YLim', [0 35] );
+set( gca,'YLim', [0 40] );
 % Equation: f(x) =  a1*exp(-((x-b1)/c1)^2)
 expfit_str1 = ['y = ' num2str(a, '%.2f') ' * exp(-(x-', num2str(b,'%.2f') '/', num2str(c,'%.2f'),')^2)'];
 t1 = text( 20, 15, expfit_str1 );
-set( t1, 'FontSize',12 );
+set( t1, 'FontSize', 12 );
 expfit_str2 = ['Mean of Velocity = ' num2str(b) ];
 t2 = text( 20, 10, expfit_str2 );
-set( t2, 'FontSize',12 );
+set( t2, 'FontSize', 12 );
+expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
+t3 = text( 20, 5, expfit_str3 );
+set( t3, 'FontSize',12 );
 xlim( [0, 40] );
+ylim( [0, 40] );
 
 % Label axes
 xlabel( 'Velocity (um/min)', 'fontsize', 12, 'Fontname', 'arial' );
