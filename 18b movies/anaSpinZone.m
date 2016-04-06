@@ -246,7 +246,7 @@ Kif18B_aster_ub_sta.vl_binValues = binValues';
 Neg2_spindle_half_sta.vl_normCounts = 100 * counts' / sum(counts);
 Neg2_spindle_half_sta.vl_binValues = binValues';
 [ Neg2_spindle_half_sta.vl_fitResult, Neg2_spindle_half_sta.vl_gof ] = ...
-    createGaussianFit( Neg2_spindle_half_sta.vl_binValues, Neg2_spindle_half_sta.vl_normCounts, ['Neg2 spindle_', num2str(perSpindle)] );
+    createGaussianFit( Neg2_spindle_half_sta.vl_binValues, Neg2_spindle_half_sta.vl_normCounts, ['Neg2 spindle ', num2str(perSpindle)] );
 
 % For Kif18B spindle 0.6
 [ counts, binValues ] = hist( Kif18B_spindle_half_sta.vl_total, edges );
@@ -254,7 +254,7 @@ Neg2_spindle_half_sta.vl_binValues = binValues';
 Kif18B_spindle_half_sta.vl_normCounts = 100 * counts' / sum(counts);
 Kif18B_spindle_half_sta.vl_binValues = binValues';
 [ Kif18B_spindle_half_sta.vl_fitResult, Kif18B_spindle_half_sta.vl_gof ] = ...
-    createGaussianFit( Kif18B_spindle_half_sta.vl_binValues, Kif18B_spindle_half_sta.vl_normCounts, ['Kif18B spindle_',  num2str(perSpindle)] );
+    createGaussianFit( Kif18B_spindle_half_sta.vl_binValues, Kif18B_spindle_half_sta.vl_normCounts, ['Kif18B spindle ',  num2str(perSpindle)] );
 
 %%  Save all vectors in workspace under file <Position_Analysis.m>
 clear ('binValues', 'counts', 'edges', 'fontsize', 'group', 'i',...
@@ -262,3 +262,4 @@ clear ('binValues', 'counts', 'edges', 'fontsize', 'group', 'i',...
 
 save ('Position_Analysis'); 
 toc; 
+close all; 
