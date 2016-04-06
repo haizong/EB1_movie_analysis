@@ -93,7 +93,7 @@ for n = 1:length( Neg2 )
                 tracks_left = tracks_left +1;
                 % decide if tracks fall into zone 2 (left pole to right pole)
             elseif any( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) > Neg2(n).Pole_left_r(1) ) && ...
-                    all( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) <= Neg2(n).Pole_right_r(1) )
+                    any( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) <= Neg2(n).Pole_right_r(1) )
                 Neg2(n).Mid_xCrd(size(Neg2(n).Mid_xCrd,1)+1,:) = Neg2(n).xCoord_r(i,:);
                 Neg2(n).Mid_yCrd(size(Neg2(n).Mid_yCrd,1)+1,:) = Neg2(n).yCoord_r(i,:);
                 tracks_middle = tracks_middle +1;
@@ -105,20 +105,20 @@ for n = 1:length( Neg2 )
                     tracks_middle_up = tracks_middle_up +1;
                     % If tracks falls into zone 2, decide if they are in zone 2_2
                 elseif any( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) >= Neg2(n).width_top(2) ) && ...
-                        all( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) < Neg2(n).width_bottom(2) )
+                        any( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) < Neg2(n).width_bottom(2) )
                     Neg2(n).Mid_mid_xCrd(size(Neg2(n).Mid_mid_xCrd,1)+1,:) = Neg2(n).xCoord_r(i,:);
                     Neg2(n).Mid_mid_yCrd(size(Neg2(n).Mid_mid_yCrd,1)+1,:) = Neg2(n).yCoord_r(i,:);
                     tracks_middle_mid = tracks_middle_mid +1;
                     % If tracks falls into zone 2, decide if they are in zone2_3
-                elseif any( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) >= Neg2(n).width_bottom(2) ) && ...
+                elseif all( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) >= Neg2(n).width_bottom(2) ) && ...
                         any( Neg2(n).yCoord_r(i, ~isnan(Neg2(n).yCoord_r(i,:))) <= Neg2(n).box_perm.bottom  )
                     Neg2(n).Mid_btm_xCrd(size(Neg2(n).Mid_btm_xCrd,1)+1,:) = Neg2(n).xCoord_r(i,:);
                     Neg2(n).Mid_btm_yCrd(size(Neg2(n).Mid_btm_yCrd,1)+1,:) = Neg2(n).yCoord_r(i,:);
                     tracks_middle_btm = tracks_middle_btm +1;
                 end
                 % decide if tracks fall into zone 3 (right pole to right boundary)
-            elseif any( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) > Neg2(n).Pole_right_r(1) ) && ...
-                    all( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) <= Neg2(n).box_perm.right(1) )
+            elseif all( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) > Neg2(n).Pole_right_r(1) ) && ...
+                    any( Neg2(n).xCoord_r(i, ~isnan(Neg2(n).xCoord_r(i,:))) <= Neg2(n).box_perm.right(1) )
                 Neg2(n).Right_xCrd(size(Neg2(n).Right_xCrd,1)+1,:) = Neg2(n).xCoord_r(i,:);
                 Neg2(n).Right_yCrd(size(Neg2(n).Right_yCrd,1)+1,:) = Neg2(n).yCoord_r(i,:);
                 tracks_right = tracks_right +1;
@@ -164,7 +164,7 @@ for n = 1:length( Kif18B )
                 tracks_left = tracks_left +1;
                 % decide if tracks fall into zone 2 (left pole to right pole)
             elseif any( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) > Kif18B(n).Pole_left_r(1) ) && ...
-                    all( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) <= Kif18B(n).Pole_right_r(1) )
+                    any( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) <= Kif18B(n).Pole_right_r(1) )
                 Kif18B(n).Mid_xCrd(size(Kif18B(n).Mid_xCrd,1)+1,:) = Kif18B(n).xCoord_r(i,:);
                 Kif18B(n).Mid_yCrd(size(Kif18B(n).Mid_yCrd,1)+1,:) = Kif18B(n).yCoord_r(i,:);
                 tracks_middle = tracks_middle +1;
@@ -176,20 +176,20 @@ for n = 1:length( Kif18B )
                     tracks_middle_up = tracks_middle_up +1;
                     % If tracks fall into zone 2, decide if they are in zone 2_2
                 elseif any( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) >= Kif18B(n).width_top(2) ) && ...
-                        all( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) < Kif18B(n).width_bottom(2) )
+                        any( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) < Kif18B(n).width_bottom(2) )
                     Kif18B(n).Mid_mid_xCrd(size(Kif18B(n).Mid_mid_xCrd,1)+1,:) = Kif18B(n).xCoord_r(i,:);
                     Kif18B(n).Mid_mid_yCrd(size(Kif18B(n).Mid_mid_yCrd,1)+1,:) = Kif18B(n).yCoord_r(i,:);
                     tracks_middle_mid = tracks_middle_mid +1;
                     % If tracks falls into zone 2, decide if they are in zone2_3
-                elseif any( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) >= Kif18B(n).width_bottom(2) ) && ...
+                elseif all( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) >= Kif18B(n).width_bottom(2) ) && ...
                         any( Kif18B(n).yCoord_r(i, ~isnan(Kif18B(n).yCoord_r(i,:))) <= Kif18B(n).box_perm.bottom  )
                     Kif18B(n).Mid_btm_xCrd(size(Kif18B(n).Mid_btm_xCrd,1)+1,:) = Kif18B(n).xCoord_r(i,:);
                     Kif18B(n).Mid_btm_yCrd(size(Kif18B(n).Mid_btm_yCrd,1)+1,:) = Kif18B(n).yCoord_r(i,:);
                     tracks_middle_btm = tracks_middle_btm +1;
                 end
                 % decide if tracks fall into zone 3 (right pole to right boundary)
-            elseif any( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) > Kif18B(n).Pole_right_r(1) ) && ...
-                    all( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) <= Kif18B(n).box_perm.right(1) )
+            elseif all( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) > Kif18B(n).Pole_right_r(1) ) && ...
+                    any( Kif18B(n).xCoord_r(i, ~isnan(Kif18B(n).xCoord_r(i,:))) <= Kif18B(n).box_perm.right(1) )
                 Kif18B(n).Right_xCrd(size(Kif18B(n).Right_xCrd,1)+1,:) = Kif18B(n).xCoord_r(i,:);
                 Kif18B(n).Right_yCrd(size(Kif18B(n).Right_yCrd,1)+1,:) = Kif18B(n).yCoord_r(i,:);
                 tracks_right = tracks_right +1;
@@ -205,6 +205,6 @@ end
 % For Kif18B, I double checked the number of tracks in each zones to make sure that all tracks falls into specified regions.
 
 %% Save original data 
-save ( 'Neg2.mat', 'Neg2', 'Neg2_mean_theta' );
-save ( 'Kif18B.mat', 'Kif18B', 'Kif18B_mean_theta' );
+save ( 'Neg2.mat', 'Neg2' );
+save ( 'Kif18B.mat', 'Kif18B' );
 
