@@ -43,29 +43,30 @@ gof.Tau_ci = 1./gof.K_ci;
 
 %% Create a figure for the plots.
 % figure( 'Name', 'One phase decay' );
-
+fontsize = 28; 
+titlesize = 28; 
 % Plot fit with data.
 % subplot( 2, 1, 1 );
-h = bar( xData, yData, color );  hold on    % Plot histogram
+h = bar( xData, yData, color, 'EdgeColor', color );  hold on    % Plot histogram
 f = plot( fitresult, color ); set( f, 'LineWidth', 2 ); % Plot fitcurve
 % l = legend( f, 'Nonlinear regression: One phase decay', 'Location', 'NorthEast');
 % set( l, 'FontSize',12 );
-set( gca,'XLim', [2 40], 'XTick', 4:4:40 );
-set( gca,'YLim', [0 60] );
+set( gca,'XLim', [2 40], 'XTick', 4:4:40, 'fontsize',20 );
+set( gca,'YLim', [0 60], 'YTick', 0:10:60, 'fontsize',20 );
 % Equation: y = a * exp(b*x)
 expfit_str1 = ['y = ' num2str(Y0) ' * exp(' num2str(-K) '* x)'];
 t1 = text( 15, 25, expfit_str1 );
-set( t1, 'FontSize',12 );
+set( t1, 'FontSize', 16 );
 expfit_str2 = ['Tau = ' num2str(Tau) ];
 t2 = text( 15, 20, expfit_str2 );
-set( t2, 'FontSize',12 );
+set( t2, 'FontSize', 16 );
 % expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
 % t3 = text( 30, 15, expfit_str3 );
 % set( t3, 'FontSize',12 );
 % Label axes
-xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
-ylabel( 'Frequency Distribution (%)' , 'fontsize', 12, 'Fontname', 'arial' );
-title (['One phase decay fitting of ', name], 'fontsize', 14, 'Fontname', 'arial' );
+xlabel( 'Lifetimes (sec)', 'fontsize', fontsize, 'Fontname', 'arial' );
+ylabel( 'Frequency Distribution (%)' , 'fontsize', fontsize, 'Fontname', 'arial' );
+title (['One phase decay fitting of ', name], 'fontsize', titlesize, 'Fontname', 'arial' );
 
 % % Plot residuals.
 % subplot( 2, 1, 2 );

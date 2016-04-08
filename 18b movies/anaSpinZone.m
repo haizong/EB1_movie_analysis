@@ -159,7 +159,8 @@ tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Neg2_aster_lr_sta.lt_bin = tbl(:,1);
 Neg2_aster_lr_sta.lt_freq_dist = tbl(:,3);
-[Neg2_aster_lr_sta.lt_fitresult, Neg2_aster_lr_sta.lt_gof] = createExpFit( Neg2_aster_lr_sta.lt_bin, Neg2_aster_lr_sta.lt_freq_dist, 'Neg2 aster lr' );
+[Neg2_aster_lr_sta.lt_fitresult, Neg2_aster_lr_sta.lt_gof] = ...
+    createExpFit( Neg2_aster_lr_sta.lt_bin, Neg2_aster_lr_sta.lt_freq_dist, 'Neg2 aster lr' );
 
 % Kif18B
 tbl_temp= tabulate( Kif18B_aster_lr_sta.lt_total );
@@ -167,9 +168,10 @@ tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Kif18B_aster_lr_sta.lt_bin = tbl(:,1);
 Kif18B_aster_lr_sta.lt_freq_dist = tbl(:,3);
-[Kif18B_aster_lr_sta.lt_fitresult, Kif18B_aster_lr_sta.lt_gof] = createExpFit( Kif18B_aster_lr_sta.lt_bin, Kif18B_aster_lr_sta.lt_freq_dist, 'Kif18B aster lr' );
+[Kif18B_aster_lr_sta.lt_fitresult, Kif18B_aster_lr_sta.lt_gof] = ...
+    createExpFit( Kif18B_aster_lr_sta.lt_bin, Kif18B_aster_lr_sta.lt_freq_dist, 'Kif18B aster lr' );
 
-%% Pool all the velocity in corresponding position together.
+%% Pool all the litime in corresponding position together.
 
 % For aster_ub 
 % Neg2
@@ -178,7 +180,8 @@ tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Neg2_aster_ub_sta.lt_bin = tbl(:,1);
 Neg2_aster_ub_sta.lt_freq_dist = tbl(:,3);
-[Neg2_aster_ub_sta.lt_fitresult, Neg2_aster_ub_sta.lt_gof] = createExpFit( Neg2_aster_ub_sta.lt_bin, Neg2_aster_ub_sta.lt_freq_dist, 'Neg2 aster ub' );
+[Neg2_aster_ub_sta.lt_fitresult, Neg2_aster_ub_sta.lt_gof] = ...
+    createExpFit( Neg2_aster_ub_sta.lt_bin, Neg2_aster_ub_sta.lt_freq_dist, 'Neg2 aster ub' );
 
 % Kif18B
 tbl_temp= tabulate( Kif18B_aster_ub_sta.lt_total );
@@ -186,17 +189,19 @@ tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Kif18B_aster_ub_sta.lt_bin = tbl(:,1);
 Kif18B_aster_ub_sta.lt_freq_dist = tbl(:,3);
-[Kif18B_aster_ub_sta.lt_fitresult, Kif18B_aster_ub_sta.lt_gof] = createExpFit( Kif18B_aster_ub_sta.lt_bin, Kif18B_aster_ub_sta.lt_freq_dist, 'Kif18B aster ub' );
+[Kif18B_aster_ub_sta.lt_fitresult, Kif18B_aster_ub_sta.lt_gof] = ...
+    createExpFit( Kif18B_aster_ub_sta.lt_bin, Kif18B_aster_ub_sta.lt_freq_dist, 'Kif18B aster ub' );
 
 %% for spindle half
-% For spindle_half 
+
 % Neg2
 tbl_temp= tabulate( Neg2_spindle_half_sta.lt_total );
 tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Neg2_spindle_half_sta.lt_bin = tbl(:,1);
 Neg2_spindle_half_sta.lt_freq_dist = tbl(:,3);
-[Neg2_spindle_half_sta.lt_fitresult, Neg2_spindle_half_sta.lt_gof] = createExpFit( Neg2_spindle_half_sta.lt_bin, Neg2_spindle_half_sta.lt_freq_dist, 'Neg2 spindle 0.6' );
+[Neg2_spindle_half_sta.lt_fitresult, Neg2_spindle_half_sta.lt_gof] = ...
+    createExpFit( Neg2_spindle_half_sta.lt_bin, Neg2_spindle_half_sta.lt_freq_dist, 'Neg2 spindle 0.6' );
 
 % Kif18B
 tbl_temp= tabulate( Kif18B_spindle_half_sta.lt_total );
@@ -204,7 +209,8 @@ tbl = tbl_temp( 4:2:end, : );
 clear tbl_temp;
 Kif18B_spindle_half_sta.lt_bin = tbl(:,1);
 Kif18B_spindle_half_sta.lt_freq_dist = tbl(:,3);
-[Kif18B_spindle_half_sta.lt_fitresult, Kif18B_spindle_half_sta.lt_gof] = createExpFit( Kif18B_spindle_half_sta.lt_bin, Kif18B_spindle_half_sta.lt_freq_dist, 'Kif18B spindle 0.6' );
+[Kif18B_spindle_half_sta.lt_fitresult, Kif18B_spindle_half_sta.lt_gof] = ...
+    createExpFit( Kif18B_spindle_half_sta.lt_bin, Kif18B_spindle_half_sta.lt_freq_dist, 'Kif18B spindle 0.6' );
 
 %% Frequency distribution and Exponential fit of lifetimes in corresponding regions
 edges = 0:2:38;

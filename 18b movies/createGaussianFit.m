@@ -1,4 +1,4 @@
-function [fitresult, gof] = createGaussianFit(binVaules, normalizedCounts, name)
+function [fitresult, gof] = createGaussianFit(binVaules, normalizedCounts, name, color)
 %CREATEFIT(EDGES,NORMALIZEDCOUNTS)
 %  Create a fit.
 %
@@ -44,42 +44,44 @@ gof.Mean_ci = ci(:,2)';
 gof.SD_ci = sqrt(ci(:,3)' .^2/2);
 
 %% Plot fit with data.
-figure( 'Name', 'Gaussian Fit' );
-subplot( 2, 1, 1 );
-h = bar( xData, yData ); hold on    % Plot histogram
-f = plot( fitresult ); set( f, 'LineWidth', 2 );  % Plot fitcurve
-l = legend( 'Velocity vs. binEdges', 'Gaussian Fit', 'Location', 'NorthEast' );
-set( l, 'FontSize',12 );
-set( gca,'XLim', [0 40], 'XTick', 0:5:40 );
-set( gca,'YLim', [0 40] );
+% figure( 'Name', 'Gaussian Fit' );
+% subplot( 2, 1, 1 );
+fontsize = 28; 
+titlesize = 28; 
+h = bar( xData, yData, color, 'EdgeColor', color ); hold on    % Plot histogram
+f = plot( fitresult, color ); set( f, 'LineWidth', 2 );  % Plot fitcurve
+% l = legend( 'Velocity vs. binEdges', 'Gaussian Fit', 'Location', 'NorthEast' );
+% set( l, 'FontSize',12 );
+set( gca,'XLim', [0 20], 'XTick', 0:5:20, 'fontsize',20 );
+set( gca,'YLim', [0 20], 'YTick', 0:5:20, 'fontsize',20 );
 % Equation: f(x) =  a1*exp(-((x-b1)/c1)^2)
 expfit_str1 = ['y = ' num2str(a, '%.2f') ' * exp(-(x-', num2str(b,'%.2f') '/', num2str(c,'%.2f'),')^2)'];
-t1 = text( 20, 15, expfit_str1 );
-set( t1, 'FontSize', 12 );
+t1 = text( 10, 14, expfit_str1 );
+set( t1, 'FontSize', 16 );
 expfit_str2 = ['Mean of Velocity = ' num2str(b) ];
-t2 = text( 20, 10, expfit_str2 );
-set( t2, 'FontSize', 12 );
-expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
-t3 = text( 20, 5, expfit_str3 );
-set( t3, 'FontSize',12 );
-xlim( [0, 40] );
-ylim( [0, 40] );
+t2 = text( 10, 10, expfit_str2 );
+set( t2, 'FontSize', 16 );
+% expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
+% t3 = text( 10, 15, expfit_str3 );
+% set( t3, 'FontSize',12 );
+xlim( [0, 20] );
+ylim( [0, 20] );
 
 % Label axes
-xlabel( 'Velocity (um/min)', 'fontsize', 12, 'Fontname', 'arial' );
-ylabel( 'Relative frequency distribution (%)', 'fontsize', 12, 'Fontname', 'arial' );
-title (['Gaussian fit of velocity ', name], 'fontsize', 14, 'Fontname', 'arial' );
+xlabel( 'Velocity (um/min)', 'fontsize', fontsize, 'Fontname', 'arial' );
+ylabel( 'Frequency distribution (%)', 'fontsize', fontsize, 'Fontname', 'arial' );
+title (['Gaussian fit of velocity ', name], 'fontsize', titlesize, 'Fontname', 'arial' );
 
-% Plot residuals.
-subplot( 2, 1, 2 );
-r = plot( fitresult, xData, yData, 'residuals' );
-set( r, 'MarkerSize', 12 );
-legend( r, 'Gaussian distribution - residuals', 'Zero Line', 'Location', 'NorthEast' );
-% Label axes
-xlabel( 'Velocity (um/min)', 'fontsize', 12, 'Fontname', 'arial' );
-ylabel( 'Residuals' );
-
-print_save_figure( gcf, ['Gaussian_fit_of_', name], 'curve_fit' ); 
+% % Plot residuals.
+% subplot( 2, 1, 2 );
+% r = plot( fitresult, xData, yData, 'residuals' );
+% set( r, 'MarkerSize', 12 );
+% legend( r, 'Gaussian distribution - residuals', 'Zero Line', 'Location', 'NorthEast' );
+% % Label axes
+% xlabel( 'Velocity (um/min)', 'fontsize', 12, 'Fontname', 'arial' );
+% ylabel( 'Residuals' );
+% 
+% print_save_figure( gcf, ['Gaussian_fit_of_', name], 'curve_fit' ); 
 
 
 
