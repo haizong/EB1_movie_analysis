@@ -1,5 +1,5 @@
 % Descirption
-% Script for Plot Fig4 EB1 analysis for Claire's Neg2 and Kif18B RNAi
+% Script for Plot Fig5 EB1 analysis for Claire's Neg2 and Kif18B RNAi
 % movies. Plot each panel separately.
 % Choose representative image: '20150420-Neg2-003' -- Neg2(9) &
 % '20150406-18B2-003' -- Kif18B(3)
@@ -13,8 +13,10 @@ load Kif18B.mat;
 %% 5A 
 figure();
 subNeg2 = Neg2(9).img_rot( 51:351, 113:512 );  % choose subregion with size 300 * 400
-imshow( subNeg2, [4800 10000] ); hold on;   % images were scaled differently to see the tracks. 
-print_save_figure( gcf, 'Figure_5A', 'EB1_figures' );
+imshow( subNeg2, [4800 10000] ); hold on;   % images were scaled differently to see the tracks.  
+plot ([323.33 390], [ 290 290 ], '-w', 'linewidth', 2);  
+% plot error bar 10 um = 10, 000 nm = 10, 000/150 = 66.67 pixels
+print_save_figure( gcf, 'Figure_5A_sb', 'EB1_figures' );
 fprintf ('Making Fig 5A \n');
 
 %% 5B
@@ -86,14 +88,14 @@ end;
 toc; 
 %% Plot boundaries and pole
 fprintf ('Plotting boundaries of Neg2 spindle \n'); tic; 
-plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.right(1)], ...  % up 
-    [Neg2(9).box_perm.top, Neg2(9).box_perm.top], '-w', 'linewidth',1);
-plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.right(1)], ...  % bottom
-    [Neg2(9).box_perm.bottom, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
-plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.left(1)], ... % left 
-    [Neg2(9).box_perm.top, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
-plot ([Neg2(9).box_perm.right(1), Neg2(9).box_perm.right(1)],... % right
-    [Neg2(9).box_perm.top, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.right(1)], ...  % up 
+%     [Neg2(9).box_perm.top, Neg2(9).box_perm.top], '-w', 'linewidth',1);
+% plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.right(1)], ...  % bottom
+%     [Neg2(9).box_perm.bottom, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Neg2(9).box_perm.left(1), Neg2(9).box_perm.left(1)], ... % left 
+%     [Neg2(9).box_perm.top, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Neg2(9).box_perm.right(1), Neg2(9).box_perm.right(1)],... % right
+%     [Neg2(9).box_perm.top, Neg2(9).box_perm.bottom], '-w', 'linewidth',1);
 plot ([Neg2(9).Pole_left_r(1), Neg2(9).Pole_left_r(1)], ... % pole left
     [Neg2(9).box_perm.top, Neg2(9).box_perm.bottom], '--w', 'linewidth',1);
 plot ([Neg2(9).Pole_right_r(1), Neg2(9).Pole_right_r(1)], ... % pole right
@@ -175,14 +177,14 @@ end;
 toc; 
 %% Plot boundaries and pole
 fprintf ('Plotting boundaries of Neg2 spindle \n'); tic; 
-plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.right(1)], ...  % up 
-    [Kif18B(3).box_perm.top, Kif18B(3).box_perm.top], '-w', 'linewidth',1);
-plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.right(1)], ...  % bottom
-    [Kif18B(3).box_perm.bottom, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
-plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.left(1)], ... % left 
-    [Kif18B(3).box_perm.top, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
-plot ([Kif18B(3).box_perm.right(1), Kif18B(3).box_perm.right(1)],... % right
-    [Kif18B(3).box_perm.top, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.right(1)], ...  % up 
+%     [Kif18B(3).box_perm.top, Kif18B(3).box_perm.top], '-w', 'linewidth',1);
+% plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.right(1)], ...  % bottom
+%     [Kif18B(3).box_perm.bottom, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Kif18B(3).box_perm.left(1), Kif18B(3).box_perm.left(1)], ... % left 
+%     [Kif18B(3).box_perm.top, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
+% plot ([Kif18B(3).box_perm.right(1), Kif18B(3).box_perm.right(1)],... % right
+%     [Kif18B(3).box_perm.top, Kif18B(3).box_perm.bottom], '-w', 'linewidth',1);
 plot ([Kif18B(3).Pole_left_r(1), Kif18B(3).Pole_left_r(1)], ... % pole left
     [Kif18B(3).box_perm.top, Kif18B(3).box_perm.bottom], '--w', 'linewidth',1);
 plot ([Kif18B(3).Pole_right_r(1), Kif18B(3).Pole_right_r(1)], ... % pole right
