@@ -9,7 +9,7 @@
 
 %% Initialize
 clc; clear; 
-fontsize = 12; titlesize = 14; fontname = 'arial'; 
+fontsize = 28; titlesize = 40; fontname = 'arial'; 
 load 'Neg2.mat'; 
 load Kif18B.mat;
 load Position_Analysis.mat; 
@@ -19,13 +19,13 @@ y = [ [Neg2.NumTracks]'; [Kif18B.NumTracks]'];
 group = [ones(length(Neg2),1); ones(length(Kif18B),1)*2];
 positions = [1 3];
 boxplot( y, group, 'positions', positions );
-set(gca,'xtick',[1 3]);
+set(gca,'xtick',[1 3], 'fontsize',20);
+set( gca,'YLim', [0 2000], 'YTick', 0:400:2000, 'fontsize', fontsize );
 set(gca,'xticklabel',{'Neg2','Kif18B'}, 'fontsize',fontsize, 'fontname', 'arial');
 ylabel ('Number of tracks per spindle', 'fontsize',fontsize, 'fontname', 'arial')
 print_save_figure( gcf, 'SupFig_2A_numTracks', 'Supplemental' );
 
-%%  SupFig_2B  Exponential fit of lifetimes from all tracks 
-% Pool all lifetime and velocity together while looping. 
+%%  Pool all lifetime and velocity together while looping. 
 % for Neg2
 Neg2_total_sta.lifetime.lt_total = [];
 Neg2_total_sta.velocity.vel_total = [];
@@ -42,7 +42,7 @@ for i = 1:length(Kif18B)
     Kif18B_total_sta.velocity.vel_total = [ Kif18B_total_sta.velocity.vel_total; Kif18B(i).vel_means];
 end
 
-%% Frequency distribution and Exponential fit of lifetimes data
+%% SupFig_2B  Exponential fit of lifetimes from all tracks  
 % For Neg2
 figure(); hold on; 
 tbl_temp= tabulate( Neg2_total_sta.lifetime.lt_total );
@@ -64,6 +64,8 @@ Kif18B_total_sta.lifetime.lt_freq_dist = tbl(:,3);
     createExpFit( Kif18B_total_sta.lifetime.lt_bin, ...
     Kif18B_total_sta.lifetime.lt_freq_dist, 'Kif18B', 'r' );
 box on; 
+legend( 'Neg2 histogram', 'Neg2 curve fit', 'Kif18B histogram', 'Kif18B curve fit', 'fontsize', fontsize );
+legend( 'boxoff' ); 
 print_save_figure( gcf, 'SupFig_2B_ExpFit_lifetimes', 'Supplemental' ); 
 
 %% SupFig_2C
@@ -87,7 +89,7 @@ Kif18B_total_sta.velocity.vl_binValues = binValues';
 [ Kif18B_total_sta.velocity.vl_fitResult, Kif18B_total_sta.velocity.vl_gof ] = ...
     createGaussianFit( Kif18B_total_sta.velocity.vl_binValues,...
     Kif18B_total_sta.velocity.vl_normCounts, 'Kif18B', 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2C_GauFit_vel', 'Supplemental' ); 
 save ( 'Neg2_total_sta', 'Neg2_total_sta' ); 
 save ( 'Kif18B_total_sta', 'Kif18B_total_sta' ); 
@@ -138,7 +140,7 @@ Kif18B_aster_ub_sta.lt_freq_dist = tbl(:,3);
 [Kif18B_aster_ub_sta.lt_fitresult, Kif18B_aster_ub_sta.lt_gof] = ...
     createExpFit( Kif18B_aster_ub_sta.lt_bin, Kif18B_aster_ub_sta.lt_freq_dist,...
     'Kif18B aster ub', 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2E_ExpFit_lt_Aster_ub', 'Supplemental' ); 
 %% SupFig_2F   Spindle 0.6 region
 figure (); hold on; 
@@ -161,7 +163,7 @@ Kif18B_spindle_half_sta.lt_freq_dist = tbl(:,3);
 [Kif18B_spindle_half_sta.lt_fitresult, Kif18B_spindle_half_sta.lt_gof] = ...
     createExpFit( Kif18B_spindle_half_sta.lt_bin, Kif18B_spindle_half_sta.lt_freq_dist, ...
     'Kif18B spindle 0.6', 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2F_ExpFit_lt_spindle_0.6', 'Supplemental' ); 
 
 %% SupFig_2G   Aster lr
@@ -185,7 +187,7 @@ Kif18B_aster_lr_sta.vl_binValues = binValues';
 [ Kif18B_aster_lr_sta.vl_fitResult, Kif18B_aster_lr_sta.vl_gof ] = ...
     createGaussianFit( Kif18B_aster_lr_sta.vl_binValues, Kif18B_aster_lr_sta.vl_normCounts, ...
     'Kif18B aster lr', 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2G_GauFit_vel_Aster_lr', 'Supplemental' ); 
 
 %% SupFig_2H Aster ub
@@ -207,7 +209,7 @@ Kif18B_aster_ub_sta.vl_binValues = binValues';
 [ Kif18B_aster_ub_sta.vl_fitResult, Kif18B_aster_ub_sta.vl_gof ] = ...
     createGaussianFit( Kif18B_aster_ub_sta.vl_binValues, Kif18B_aster_ub_sta.vl_normCounts, ...
     'Kif18B aster ub', 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2H_GauFit_vel_Aster_ub', 'Supplemental' ); 
 
 %% SupFig_2H Spindle 0.6 region
@@ -229,5 +231,9 @@ Kif18B_spindle_half_sta.vl_binValues = binValues';
 [ Kif18B_spindle_half_sta.vl_fitResult, Kif18B_spindle_half_sta.vl_gof ] = ...
     createGaussianFit( Kif18B_spindle_half_sta.vl_binValues, Kif18B_spindle_half_sta.vl_normCounts, ...
     ['Kif18B spindle ',  num2str(perSpindle)], 'r' );
-box on; 
+box on; legend off; 
 print_save_figure( gcf, 'SupFig_2I_GauFit_vel_Spindle_0.6', 'Supplemental' ); 
+
+%% Changed bin edges for gaussian fit.  Resave <Position_Analysis.mat> 
+clear ( 'binValues',  'counts', 'edges', 'perSpindle' );
+save ( 'Statistics');
