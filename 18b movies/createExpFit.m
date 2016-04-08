@@ -1,4 +1,4 @@
-function [fitresult, gof] = createExpFit(bin, freq_dist, name)
+function [fitresult, gof] = createExpFit(bin, freq_dist, name, color)
 %CREATEFIT(BIN,FREQ_DIST)
 %  Create a fit.
 %
@@ -42,42 +42,42 @@ gof.K_ci = - ci(:,2)';
 gof.Tau_ci = 1./gof.K_ci;  
 
 %% Create a figure for the plots.
-figure( 'Name', 'One phase decay' );
+% figure( 'Name', 'One phase decay' );
 
 % Plot fit with data.
-subplot( 2, 1, 1 );
-h = bar( xData, yData );  hold on    % Plot histogram
-f = plot( fitresult ); set( f, 'LineWidth', 2 ); % Plot fitcurve
-l = legend( f, 'Nonlinear regression: One phase decay', 'Location', 'NorthEast');
-set( l, 'FontSize',12 );
-set( gca,'XLim', [2 60], 'XTick', 4:4:60 );
+% subplot( 2, 1, 1 );
+h = bar( xData, yData, color );  hold on    % Plot histogram
+f = plot( fitresult, color ); set( f, 'LineWidth', 2 ); % Plot fitcurve
+% l = legend( f, 'Nonlinear regression: One phase decay', 'Location', 'NorthEast');
+% set( l, 'FontSize',12 );
+set( gca,'XLim', [2 40], 'XTick', 4:4:40 );
 set( gca,'YLim', [0 60] );
 % Equation: y = a * exp(b*x)
 expfit_str1 = ['y = ' num2str(Y0) ' * exp(' num2str(-K) '* x)'];
-t1 = text( 30, 25, expfit_str1 );
+t1 = text( 15, 25, expfit_str1 );
 set( t1, 'FontSize',12 );
 expfit_str2 = ['Tau = ' num2str(Tau) ];
-t2 = text( 30, 20, expfit_str2 );
+t2 = text( 15, 20, expfit_str2 );
 set( t2, 'FontSize',12 );
-expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
-t3 = text( 30, 15, expfit_str3 );
-set( t3, 'FontSize',12 );
+% expfit_str3 = ['Adj R^2 = ' num2str(gof.rsquare) ];
+% t3 = text( 30, 15, expfit_str3 );
+% set( t3, 'FontSize',12 );
 % Label axes
 xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
 ylabel( 'Frequency Distribution (%)' , 'fontsize', 12, 'Fontname', 'arial' );
 title (['One phase decay fitting of ', name], 'fontsize', 14, 'Fontname', 'arial' );
 
-% Plot residuals.
-subplot( 2, 1, 2 );
-r = plot( fitresult, xData, yData, 'residuals' );
-set( r, 'MarkerSize', 12 );
-legend( r, 'One phase decay - residuals', 'Zero Line', 'Location', 'NorthEast' );
-% Label axes
-xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
-ylabel( 'Residuals' );
-
-print_save_figure( gcf, ['Exponential_fit_of_', name], 'curve_fit' ); 
-
+% % Plot residuals.
+% subplot( 2, 1, 2 );
+% r = plot( fitresult, xData, yData, 'residuals' );
+% set( r, 'MarkerSize', 12 );
+% legend( r, 'One phase decay - residuals', 'Zero Line', 'Location', 'NorthEast' );
+% % Label axes
+% xlabel( 'Lifetimes (sec)', 'fontsize', 12, 'Fontname', 'arial' );
+% ylabel( 'Residuals' );
+% 
+% print_save_figure( gcf, ['Exponential_fit_of_', name], 'curve_fit' ); 
+% 
 
 
 
